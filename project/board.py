@@ -1,11 +1,13 @@
-from tile import Tile 
-from dir import Dir
+from .tile import Tile 
+from .dir import Dir
+
 import numpy as np
 import pygame as pg
 from dir import Dir
 
 
 COLOR = pg.Color("blue")
+TILE_SIZE=100
 
 class Board:
     def __init__(self, board, nb_lines, nb_cols):
@@ -76,7 +78,12 @@ class Board:
                     return i, j
 
 
-
+    def draw(self, screen : pg.Surface, size : int) :
+        for liste in self._board :
+            for elt in liste : 
+                elt.draw(screen, TILE_SIZE)
+    
+    
 
 
 

@@ -1,7 +1,7 @@
 # ruff: noqa: D100,S311,E501
 
 from .cmd_line import read_args
-from .taquin import Taquin
+from .taquin import start
 
 
 def main() -> None:
@@ -10,4 +10,4 @@ def main() -> None:
     args = read_args()
 
     # Start automata
-    Taquin(play_mode=args.play).start()
+    start()
