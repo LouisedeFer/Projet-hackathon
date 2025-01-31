@@ -65,7 +65,7 @@ class Board:
                 board[i][j] = Tile(i, j, COLOR, tab[i][j])
         return cls(board)
     
-    def movement(self, direction : Dir) -> Board:
+    def movement(self, direction : Dir) -> "Board":
         # change the position of '-' depending on the direction
         new = self._board
         x, y = self.minus_position()
