@@ -25,6 +25,8 @@ class Checkerboard:
             for j in range(3):
                 print(board.board[i][j].number, end = ' ')
             print()
+    
+    
 
 
 
