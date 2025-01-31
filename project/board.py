@@ -76,7 +76,6 @@ class Board:
                     return i, j
 
 
-    
 
 
 
