@@ -18,7 +18,7 @@ def start_play() -> None :
 
     while True : 
 
-        clock.tick(1)
+        clock.tick(10)
         for event in pygame.event.get() :
             # Closing window (Mouse click on cross icon or OS keyboard shortcut)
             if event.type == pygame.QUIT:
