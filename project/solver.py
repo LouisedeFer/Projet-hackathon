@@ -8,8 +8,6 @@ def voisins(position : Board) -> List[Position]:
         reachable_positions.append(next_position)
     return reachable_positions
 
-
-
 def dijkstra(start_board):
     """Explore graph with dijkstra method."""
     priority_queue = [(start_board,0)]
