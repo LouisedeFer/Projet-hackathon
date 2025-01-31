@@ -26,11 +26,9 @@ class Tile:
         self._y = y # Line index
         self._color = color
         self._number=number
+        self._font=None
+
     
-    def _init(self) ->None :
-        #Download font
-        with importlib.resources.path("project", "DejaVuSansMono-Bold.ttf") as f:
-            self._font=pygame.font.Font(f, 32)
 
     @property
     def number(self)-> int :
@@ -82,10 +80,13 @@ class Tile:
     
     def draw(self, screen: pygame.Surface, size: int) -> None:
         """Draw the tile on screen."""
+        if self._font is None : 
+            with importlib.resources.path("project", "DejaVuSansMono-Bold.ttf") as f:
+                self._font=pygame.font.Font(f, 32)
         rect = pygame.Rect(self.x * size, self.y * size, size, size)
         pygame.draw.rect(screen, self.color, rect)
         text = self._font.render(f"{self._number}", True, pygame.Color("red"))
-        x, y = self.x*size + size/2, self.y*size + size/2 # Define the position where to write text.
+        x, y = self.x*size + size/3, self.y*size + size/3 # Define the position where to write text.
         screen.blit(text, (x, y))
 
         
