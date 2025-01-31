@@ -64,10 +64,10 @@ class Board:
             tab = np.array(L).reshape(NB_LINES,NB_COLS) # transforming it into a table '-'
 
         # same thing with tiles objects
-        board = [[0 for i in range(NB_LINES)] for j in range(NB_COLS)]
+        board = [[0 for j in range(NB_COLS)] for i in range(NB_LINES)]
         for i in range(NB_LINES):
             for j in range(NB_COLS):
-                board[i][j] = Tile(i, j, COLOR, tab[i][j])
+                board[i][j] = Tile(COLOR, tab[i][j])
 
         return cls(board)
     
@@ -75,17 +75,20 @@ class Board:
         # change the position of '-' depending on the direction
         i, j = self.minus_position()
         print((i,j))
+        print(self)
 
-        if direction == Dir.UP and i > 0:
+        if direction == Dir.LEFT and i > 0:
             self._board[i][j], self._board[i-1][j] = self._board[i-1][j], self._board[i][j]
             print(self)
-
-        elif direction == Dir.DOWN and i < 2:
+        elif direction == Dir.RIGHT and i < 2:
             self._board[i][j], self._board[i+1][j] = self._board[i+1][j], self._board[i][j]
-        elif direction == Dir.LEFT and j > 0:
+            print(self)
+        elif direction == Dir.UP and j > 0:
             self._board[i][j], self._board[i][j-1] = self._board[i][j-1], self._board[i][j]
-        elif direction == Dir.RIGHT and j < 2:
+            print(self)
+        elif direction == Dir.DOWN and j < 2:
             self._board[i][j], self._board[i][j+1] = self._board[i][j+1], self._board[i][j]
+            print(self)
 
 
 
@@ -97,7 +100,7 @@ class Board:
         for i in range(self._nb_lines):
             for j in range(self._nb_cols):
                 if self._board[i][j].number == '-':
-                    pos= (j, i)
+                    pos= (i, j)
                     break 
 
         if pos is None :
@@ -106,9 +109,9 @@ class Board:
 
 
     def draw(self, screen : pg.Surface, size : int) :
-        for liste in self._board :
-            for elt in liste : 
-                elt.draw(screen, size)
+        for i,liste in enumerate(self._board) :
+            for j,elt in enumerate (liste) : 
+                elt.draw(col=i,row=j,screen=screen, size=size)
 
     @property
     def board(self):

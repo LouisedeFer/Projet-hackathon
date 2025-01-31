@@ -20,10 +20,8 @@ class Tile:
     Includes a color.
     """
 
-    def __init__(self, x: int, y: int, color: pygame.Color, number : int) -> None:
+    def __init__(self, color: pygame.Color, number : str) -> None:
         """Object initialization."""
-        self._x = x # Column index
-        self._y = y # Line index
         self._color = color
         self._number=number
         self._font=None
@@ -35,26 +33,6 @@ class Tile:
         """The number of the tile."""
         return self._number
     
-
-    @property
-    def x(self) -> int:
-        """The x coordinate (i.e.: column index) of the tile."""
-        return self._x
-
-    @x.setter
-    def x(self, value: int) -> None:
-        """Set the x coordinate."""
-        self._x = value
-
-    @property
-    def y(self) -> int:
-        """The y coordinate (i.e.: line index) of the tile."""
-        return self._y
-
-    @y.setter
-    def y(self, value: int) -> None:
-        """Set the y coordinate."""
-        self._y = value
 
     @property
     def color(self) -> pygame.Color:
@@ -78,15 +56,13 @@ class Tile:
 
 
     
-    def draw(self, screen: pygame.Surface, size: int) -> None:
+    def draw(self, col, row, screen: pygame.Surface, size: int) -> None:
         """Draw the tile on screen."""
         if self._font is None : 
             with importlib.resources.path("project", "DejaVuSansMono-Bold.ttf") as f:
                 self._font=pygame.font.Font(f, 32)
-        rect = pygame.Rect(self.x * size, self.y * size, size, size)
+        rect = pygame.Rect(col * size, row* size, size, size)
         pygame.draw.rect(screen, self.color, rect)
         text = self._font.render(f"{self._number}", True, pygame.Color("red"))
-        x, y = self.x*size + size/3, self.y*size + size/3 # Define the position where to write text.
+        x, y = col*size + size/3, row*size + size/3 # Define the position where to write text.
         screen.blit(text, (x, y))
-
-        
