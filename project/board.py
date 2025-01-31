@@ -23,6 +23,14 @@ class Board:
             for j in range(self._nb_cols):
                 print(self._board[i][j].number, end = ' ')
             print()
+        
+    def __equals__(self, other):
+        indic = True
+        for i in range(3):
+            for j in range(3):
+                if self._board[i][j].number != other._board[i][j].number:
+                    indic = False
+        return indic
 
     def allowed_moves(self) -> list[Dir]:
         "Return a list of all the playable moves in a given configuration."
