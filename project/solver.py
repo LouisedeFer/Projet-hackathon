@@ -1,10 +1,10 @@
 from .board import Board
 
-def voisins(position : Board) -> list[Position]:
+def voisins(position : Board) -> list[Board]:
     """Give the reacheable positions one step away from a given one."""
     reachable_positions = []
     for move in position.allowed_moves(): # where the method calculates all the playable moved based on a given position
-        next_position = position.play(move) # calculate a new position by playing a move on the former one
+        next_position = position.movement(move) # calculate a new position by playing a move on the former one
         reachable_positions.append(next_position)
     return reachable_positions
 
@@ -32,7 +32,7 @@ def dijkstra(start_board):
     return graph
 
 def solve(start_board, goal_board):
-    """Solve the shortest path"""
+    """Solve the shortest path."""
     graph = dijkstra(goal_board)
 
     distance = graph[start_board][0]

@@ -2,6 +2,7 @@
 
 import argparse
 
+
 def read_args() -> argparse.Namespace:
     """Read command line arguments."""
     # Parser and its description
