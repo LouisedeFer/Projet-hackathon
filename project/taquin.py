@@ -57,6 +57,7 @@ def start_auto() -> None :
     for i in range(NB_LINES):
         for j in range(NB_COLS):
             solution_board[i][j]=i*j + j + 1
+    solution_board[-1][-1]="-"
     solution = Board(solution_board)
 
     result = solve(board, solution)
