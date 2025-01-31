@@ -4,7 +4,9 @@ from .tile import Tile
 from .solver import solve
 from .dir import Dir
 
-SIZE_TILE=100
+SIZE_TILE = 100
+NB_LINES = 3
+NB_COLS = 3
 
 def start_play() -> None : 
 
@@ -51,7 +53,12 @@ def start_auto() -> None :
     screen=pygame.display.set_mode(screen_size)
     clock = pygame.time.Clock()
 
-    solution = Board([[Tile(i,j,(0,0,0),3*i+j) for j in range(3)] for i in range(3)])
+    solution_board = [[]]
+    for i in range(NB_LINES):
+        for j in range(NB_COLS):
+            solution_board[i][j]=i*j + j + 1
+    solution_board[-1][-1]="-"
+    solution = Board(solution_board)
 
     result = solve(board, solution)
 

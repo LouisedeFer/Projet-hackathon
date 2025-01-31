@@ -26,11 +26,11 @@ class Board:
             #s += "\n"
         return s
         
-    def __equals__(self, other):
+    def __eq__(self, other)-> bool:
         indic = True
         for i in range(3):
             for j in range(3):
-                if self._board[i][j].number != other._board[i][j].number:
+                if self._board[i][j].number != other.board[i][j].number:
                     indic = False
         return indic
 
@@ -108,7 +108,13 @@ class Board:
     def draw(self, screen : pg.Surface, size : int) :
         for liste in self._board :
             for elt in liste : 
-                elt.draw(screen, TILE_SIZE)
+                elt.draw(screen, size)
+
+    @property
+    def board(self):
+        return self._board
+    
+
     
     
 
