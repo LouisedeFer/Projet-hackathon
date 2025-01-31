@@ -24,10 +24,10 @@ class Board:
                 print(self._board[i][j].number, end = ' ')
             print()
 
-    def allowed_moves(self) -> List[Dir]:
+    def allowed_moves(self) -> list[Dir]:
         "Return a list of all the playable moves in a given configuration."
         L= [Dir.UP, Dir.DOWN, Dir.LEFT, Dir.RIGHT]
-        minus_position = self.get_minus()
+        minus_position = self.minus_position()
         i = minus_position[0]
         j = minus_position[0]
         if i == 0:
@@ -42,23 +42,23 @@ class Board:
         
     @classmethod
     def config(cls):
-        # on génère une configuration aléatoire de chiffres pour le board
+        # generate a random configuration of the board
         L = []
         for i in range(1, NB_LINES*NB_LINES):
             L.append(f'{i}')
-        L.append('-') # liste des chiffres et du '-'
-        tab = np.array(L).reshape(NB_LINES,NB_COLS) # tableau des chiffres et du '-'
-        np.random.shuffle(tab) # tableau des chiffres et du '-' mélangée
+        L.append('-') # list of integers and a '-'
+        tab = np.array(L).reshape(NB_LINES,NB_COLS) # transforming it into a table '-'
+        np.random.shuffle(tab) # and then shuffling it 
 
-        # on fait la même chose avec des objets tiles
+        # same thing with tiles objects
         board = [[0 for i in range(NB_LINES)] for j in range(NB_COLS)]
         for i in range(NB_LINES):
             for j in range(NB_COLS):
-                board[i][j] = Tile(i, j, COLOR, tab[i][j]) # même chose mais composé de tiles
+                board[i][j] = Tile(i, j, COLOR, tab[i][j])
         return cls(board)
     
     def movement(self, direction : Dir) -> Board:
-        # change la position du '-' en fonction de la direction
+        # change the position of '-' depending on the direction
         new = self._board
         x, y = self.minus_position()
 
@@ -73,7 +73,7 @@ class Board:
         
         return Board(new)
 
-    def minus_position(self):
+    def minus_position(self) -> tuple[int, int]:
         # cherche la posiiton du "-" dans le board
         for i in range(self._nb_lines):
             for j in range(self._nb_cols):
