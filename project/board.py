@@ -3,7 +3,7 @@ from .dir import Dir
 
 import numpy as np
 import pygame as pg
-from dir import Dir
+
 
 ### DEFAULT CONSTANTS
 
@@ -18,11 +18,13 @@ class Board:
         self._nb_cols = len(self._board[0])
         self._nb_lines = len(self._board)
 
-    def __repr__(self):
+    def __repr__(self)->str:
+        s = ""
         for i in range(self._nb_lines):
             for j in range(self._nb_cols):
-                print(self._board[i][j].number, end = ' ')
-            print()
+                s += str(self._board[i][j].number)
+            #s += "\n"
+        return s
         
     def __eq__(self, other)-> bool:
         indic = True
@@ -49,45 +51,57 @@ class Board:
         return L
         
     @classmethod
-    def config(cls):
+    def config(cls, L : list[str] |None= None):
         # generate a random configuration of the board
-        L = []
-        for i in range(1, NB_LINES*NB_LINES):
-            L.append(f'{i}')
-        L.append('-') # list of integers and a '-'
-        tab = np.array(L).reshape(NB_LINES,NB_COLS) # transforming it into a table '-'
-        np.random.shuffle(tab) # and then shuffling it 
+        if L is None:
+            L = []
+            for i in range(1, NB_LINES*NB_LINES):
+                L.append(f'{i}')
+            L.append('-') # list of integers and a '-'
+            tab = np.array(L).reshape(NB_LINES,NB_COLS) # transforming it into a table '-'
+            np.random.shuffle(tab) # and then shuffling it 
+        else:
+            tab = np.array(L).reshape(NB_LINES,NB_COLS) # transforming it into a table '-'
 
         # same thing with tiles objects
         board = [[0 for i in range(NB_LINES)] for j in range(NB_COLS)]
         for i in range(NB_LINES):
             for j in range(NB_COLS):
                 board[i][j] = Tile(i, j, COLOR, tab[i][j])
+
         return cls(board)
     
-    def movement(self, direction : Dir) -> "Board":
+    def movement(self, direction : Dir) -> None:
         # change the position of '-' depending on the direction
-        new = self._board
-        x, y = self.minus_position()
+        i, j = self.minus_position()
+        print((i,j))
 
-        if direction == Dir.UP and x > 0:
-            new[x][y], new[x-1][y] = new[x-1][y], new[x][y]
-        elif direction == Dir.DOWN and x < 2:
-            new[x][y], new[x+1][y] = new[x+1][y], new[x][y]
-        elif direction == Dir.LEFT and y > 0:
-            new[x][y], new[x][y-1] = new[x][y-1], new[x][y]
-        elif direction == Dir.RIGHT and y < 2:
-            new[x][y], new[x][y+1] = new[x][y+1], new[x][y]
+        if direction == Dir.UP and i > 0:
+            self._board[i][j], self._board[i-1][j] = self._board[i-1][j], self._board[i][j]
+            print(self)
+
+        elif direction == Dir.DOWN and i < 2:
+            self._board[i][j], self._board[i+1][j] = self._board[i+1][j], self._board[i][j]
+        elif direction == Dir.LEFT and j > 0:
+            self._board[i][j], self._board[i][j-1] = self._board[i][j-1], self._board[i][j]
+        elif direction == Dir.RIGHT and j < 2:
+            self._board[i][j], self._board[i][j+1] = self._board[i][j+1], self._board[i][j]
+
+
+
         
-        return Board(new)
 
     def minus_position(self) -> tuple[int, int]:
         # cherche la posiiton du "-" dans le board
-        pos = (0,0)
+        pos : tuple[int,int]| None = None
         for i in range(self._nb_lines):
             for j in range(self._nb_cols):
                 if self._board[i][j].number == '-':
-                    pos = (i,j)
+                    pos= (j, i)
+                    break 
+
+        if pos is None :
+            raise Exception("hole not found")
         return pos
 
 
