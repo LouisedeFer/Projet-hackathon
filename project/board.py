@@ -59,13 +59,13 @@ class Board:
         new = self._board
         x, y = self.position()
 
-        if direction == Dir.UP:
+        if direction == Dir.UP and x > 0:
             new[x][y], new[x-1][y] = new[x-1][y], new[x][y]
-        elif direction == Dir.DOWN:
+        elif direction == Dir.DOWN and x < 2:
             new[x][y], new[x+1][y] = new[x+1][y], new[x][y]
-        elif direction == Dir.LEFT:
+        elif direction == Dir.LEFT and y > 0:
             new[x][y], new[x][y-1] = new[x][y-1], new[x][y]
-        elif direction == Dir.RIGHT:
+        elif direction == Dir.RIGHT and y < 2:
             new[x][y], new[x][y+1] = new[x][y+1], new[x][y]
         
         return Board(new)
