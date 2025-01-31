@@ -75,10 +75,12 @@ class Board:
 
     def minus_position(self) -> tuple[int, int]:
         # cherche la posiiton du "-" dans le board
+        pos = (0,0)
         for i in range(self._nb_lines):
             for j in range(self._nb_cols):
                 if self._board[i][j].number == '-':
-                    return i, j
+                    pos = (i,j)
+        return pos
 
 
     def draw(self, screen : pg.Surface, size : int) :
