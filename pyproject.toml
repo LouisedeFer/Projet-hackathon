@@ -12,6 +12,7 @@ pygame = "^2.6.1"
 [tool.poetry.scripts]
 taquin = "project.main:main"
 
+
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
 mypy = "^1.14.1"
