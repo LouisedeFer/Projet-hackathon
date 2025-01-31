@@ -10,4 +10,4 @@ def main() -> None:
     args = read_args()
 
     # Start automata
-    Taquin(play_mode=args.gui).start()
+    Taquin(play_mode=args.play).start()
