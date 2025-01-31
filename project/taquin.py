@@ -53,6 +53,9 @@ def start_auto() -> None :
             # Closing window (Mouse click on cross icon or OS keyboard shortcut)
             if event.type == pygame.QUIT:
                 pygame.quit()
+            if event.type == pygame.KEYDOWN: #on regarde s'il y a un déplacement ou fermeture d'appli
+                if event.key == pygame.K_q: 
+                    running = False
             
         board.draw(screen, SIZE_TILE)
 
