@@ -2,7 +2,18 @@
 import pygame
 
 # First party
-from dir import Dir
+from .dir import Dir
+
+# Third party
+import importlib.resources
+import sys
+from pathlib import Path
+
+
+#Download font
+with importlib.resources.path("project", "DejaVuSansMono-Bold.ttf") as f:
+    font=pygame.font.Font(f, 32)
+
 
 class Tile:
     """
@@ -23,7 +34,7 @@ class Tile:
         """The number of the tile."""
         return self._number
     
-    
+
     @property
     def x(self) -> int:
         """The x coordinate (i.e.: column index) of the tile."""
@@ -65,7 +76,13 @@ class Tile:
         return False
 
 
+    
     def draw(self, screen: pygame.Surface, size: int) -> None:
         """Draw the tile on screen."""
         rect = pygame.Rect(self.x * size, self.y * size, size, size)
         pygame.draw.rect(screen, self.color, rect)
+        text = font.render("GAME OVER", True, pygame.Color("red"))
+        x, y = self.x*size + size/2, self.y*size + size/2 # Define the position where to write text.
+        screen.blit(text, (x, y))
+
+        

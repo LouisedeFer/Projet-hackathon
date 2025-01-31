@@ -10,7 +10,6 @@ def voisins(position : Board) -> List[Position]:
 
 
 
-
 def dijkstra(start_board):
     """Explore graph with dijkstra method."""
     priority_queue = [(start_board,0)]
