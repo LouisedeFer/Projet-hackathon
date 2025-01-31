@@ -28,7 +28,7 @@ class Board:
         indic = True
         for i in range(3):
             for j in range(3):
-                if self._board[i][j].number != other._board[i][j].number:
+                if self._board[i][j].number != other.board[i][j].number:
                     indic = False
         return indic
 
@@ -65,7 +65,7 @@ class Board:
                 board[i][j] = Tile(i, j, COLOR, tab[i][j])
         return cls(board)
     
-    def movement(self, direction : Dir) -> Board:
+    def movement(self, direction : Dir) -> "Board":
         # change the position of '-' depending on the direction
         new = self._board
         x, y = self.minus_position()
@@ -93,6 +93,10 @@ class Board:
         for liste in self._board :
             for elt in liste : 
                 elt.draw(screen, TILE_SIZE)
+
+    @property
+    def board(self):
+        return self._board
     
     
 
