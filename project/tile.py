@@ -2,7 +2,7 @@
 import pygame
 
 # First party
-from .dir import Dir
+from dir import Dir
 
 class Tile:
     """

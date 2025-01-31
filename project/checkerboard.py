@@ -1,4 +1,4 @@
-from .tile import Tile 
+from tile import Tile 
 import numpy as np
 import pygame as pg
 
@@ -19,11 +19,14 @@ class Checkerboard:
                 board[i][j] = Tile(i, j, COLOR, L[i][j]) # même chose mais composé de tiles
         self.board = board
 
-board = Checkerboard()
-for i in range(3):
-    for j in range(3):
-        print(board.board[i][j].value, end = ' ')
-    print()
+    def __repr__(self):
+        board = Checkerboard()
+        for i in range(3):
+            for j in range(3):
+                print(board.board[i][j].number, end = ' ')
+            print()
+
+
 
 
 
