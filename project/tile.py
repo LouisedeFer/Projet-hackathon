@@ -84,7 +84,7 @@ class Tile:
         """Draw the tile on screen."""
         rect = pygame.Rect(self.x * size, self.y * size, size, size)
         pygame.draw.rect(screen, self.color, rect)
-        text = self._font.render("GAME OVER", True, pygame.Color("red"))
+        text = self._font.render(f"{self._number}", True, pygame.Color("red"))
         x, y = self.x*size + size/2, self.y*size + size/2 # Define the position where to write text.
         screen.blit(text, (x, y))
 
