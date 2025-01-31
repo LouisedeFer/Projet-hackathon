@@ -2,6 +2,7 @@ from tile import Tile
 from dir import Dir
 import numpy as np
 import pygame as pg
+from dir import Dir
 
 
 COLOR = pg.Color("blue")
@@ -51,6 +52,29 @@ class Board:
                 board[i][j] = Tile(i, j, COLOR, tab[i][j]) # même chose mais composé de tiles
         return cls(board)
     
+    def movement(self, direction : Dir):
+        # change la position du '-' en fonction de la direction
+        new = self._board
+        x, y = self.position()
+
+        if direction == Dir.UP:
+            new[x][y], new[x-1][y] = new[x-1][y], new[x][y]
+        elif direction == Dir.DOWN:
+            new[x][y], new[x+1][y] = new[x+1][y], new[x][y]
+        elif direction == Dir.LEFT:
+            new[x][y], new[x][y-1] = new[x][y-1], new[x][y]
+        elif direction == Dir.RIGHT:
+            new[x][y], new[x][y+1] = new[x][y+1], new[x][y]
+        
+        return Board(new)
+
+    def position(self):
+        # cherche la posiiton du "-" dans le board
+        for i in range(3):
+            for j in range(3):
+                if self._board[i][j].number == '-':
+                    return i, j
+
 
     
 
