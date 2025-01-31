@@ -33,13 +33,24 @@ class Board:
                 if self._board[i][j].number != other.board[i][j].number:
                     indic = False
         return indic
+    
+    def __hash__(self) :
+        return hash(self._nb_cols)
+    
+    def __str__(self):
+        s = ""
+        for i in range(self._nb_lines):
+            for j in range(self._nb_cols):
+                s += str(self._board[i][j].number)
+            #s += "\n"
+        return s
 
     def allowed_moves(self) -> list[Dir]:
         "Return a list of all the playable moves in a given configuration."
         L= [Dir.UP, Dir.DOWN, Dir.LEFT, Dir.RIGHT]
         minus_position = self.minus_position()
         i = minus_position[0]
-        j = minus_position[0]
+        j = minus_position[1]
         if i == 0:
             L.remove(Dir.UP)
         if i == self._nb_lines -1:
@@ -74,21 +85,19 @@ class Board:
     def movement(self, direction : Dir) -> None:
         # change the position of '-' depending on the direction
         i, j = self.minus_position()
-        print((i,j))
-        print(self)
 
         if direction == Dir.LEFT and i > 0:
             self._board[i][j], self._board[i-1][j] = self._board[i-1][j], self._board[i][j]
-            print(self)
+
         elif direction == Dir.RIGHT and i < 2:
             self._board[i][j], self._board[i+1][j] = self._board[i+1][j], self._board[i][j]
-            print(self)
+
         elif direction == Dir.UP and j > 0:
             self._board[i][j], self._board[i][j-1] = self._board[i][j-1], self._board[i][j]
-            print(self)
+
         elif direction == Dir.DOWN and j < 2:
             self._board[i][j], self._board[i][j+1] = self._board[i][j+1], self._board[i][j]
-            print(self)
+
 
 
 

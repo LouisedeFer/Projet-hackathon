@@ -53,12 +53,12 @@ def start_auto() -> None :
     screen=pygame.display.set_mode(screen_size)
     clock = pygame.time.Clock()
 
-    solution_board = [[]]
+    solution_board = [[0 for j in range(NB_COLS)]for i in range(NB_LINES)]
     for i in range(NB_LINES):
         for j in range(NB_COLS):
-            solution_board[i][j]=i*j + j + 1
+            solution_board[i][j]=str(i*NB_COLS + j + 1)
     solution_board[-1][-1]="-"
-    solution = Board(solution_board)
+    solution = Board.config(solution_board)
 
     result = solve(board, solution)
 
@@ -72,6 +72,8 @@ def start_auto() -> None :
                 pygame.quit()
         
         board = result[k]
+        print("solution")
+        print(board)
 
         board.draw(screen, SIZE_TILE)
 
