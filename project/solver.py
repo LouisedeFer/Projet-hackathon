@@ -1,6 +1,6 @@
 from .board import Board
 
-def voisins(position : Board) -> List[Board]:
+def voisins(position : Board) -> list[Board]:
     """Give the reacheable positions one step away from a given one."""
     reachable_positions = []
     for move in position.allowed_moves(): # where the method calculates all the playable moved based on a given position
