@@ -3,7 +3,7 @@ from .dir import Dir
 
 import numpy as np
 import pygame as pg
-from dir import Dir
+
 
 ### DEFAULT CONSTANTS
 

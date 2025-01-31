@@ -2,6 +2,14 @@
 
 import argparse
 
+#Global constants
+DEFAULT_HEIGHT=3
+MIN_HEIGHT=3
+MAX_HEIGHT=6
+DEFAULT_WIDTH=3
+MIN_WIDTH=3
+MAX_WIDTH=6
+
 
 def read_args() -> argparse.Namespace:
     """Read command line arguments."""
