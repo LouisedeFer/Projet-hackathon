@@ -12,9 +12,11 @@ def start_play() -> None :
     screen_size = (300,300)
     board=Board.config()
     screen=pygame.display.set_mode(screen_size)
+    clock = pygame.time.Clock()
 
     while True : 
 
+        clock.tick(1)
         for event in pygame.event.get() :
             # Closing window (Mouse click on cross icon or OS keyboard shortcut)
             if event.type == pygame.QUIT:
@@ -22,7 +24,7 @@ def start_play() -> None :
                 
             if event.type == pygame.KEYDOWN: #on regarde s'il y a un déplacement ou fermeture d'appli
                 if event.key == pygame.K_q: 
-                    running = False
+                    pygame.quit()
 
                 if event.key == pygame.K_UP:
                     board.movement(Dir.UP)
